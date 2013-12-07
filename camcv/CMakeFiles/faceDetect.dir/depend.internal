@@ -1003,3 +1003,4 @@ CMakeFiles/faceDetect.dir/faceDetect.cpp.o
  /opt/vc/userland/vcinclude/common.h
  /usr/include/opencv/cv.h
  /usr/include/opencv/highgui.h
+ /usr/local/include/bcm2835.h

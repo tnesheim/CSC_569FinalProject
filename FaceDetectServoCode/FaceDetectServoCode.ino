@@ -71,6 +71,6 @@ void loop()
      Serial.write(ACK_SERVO); 
      
      //Wait for servos to catch up
-     delay(15);
+     delay(5);
   }
 } 

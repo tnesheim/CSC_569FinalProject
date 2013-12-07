@@ -19,7 +19,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <memory.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <bcm2835.h>
+#include <termios.h>
 #include <string.h>
 #include <sys/mman.h>
 
@@ -76,6 +79,9 @@ using namespace std;
 #define DEBUG_MODE 0
 #define DEBUG if (DEBUG_MODE==1)
 
+//UART File Descriptor
+int uartFD;	
+
 //Servo control constants
 const unsigned char TILT_ID = 230;
 const unsigned char PAN_ID  = 220;
@@ -85,6 +91,10 @@ const unsigned char ACK_SERVO = 200;
 //Servo max and min values
 const unsigned char MIN_SERVO = 20;
 const unsigned char MAX_SERVO = 140;
+
+//Image bounding box values [using 5% currently]
+const int WIDTH_BOUND = 320 * 0.05;
+const int HEIGHT_BOUND = 240 * 0.05;
 
 //Initialize Servo position to 90 degrees
 unsigned char panServoPos = 90;
@@ -225,6 +235,8 @@ void writeServo(int uartFD, unsigned char servoID, unsigned char val)
    unsigned char txBuf[2];
    unsigned char ack;
 
+   printf("Cur Val: %d\n", (int) val);
+
    //Send the servo id and the desired value
    txBuf[0] = servoID;
    txBuf[1] = val;
@@ -238,6 +250,62 @@ void writeServo(int uartFD, unsigned char servoID, unsigned char val)
    {
       read(uartFD, &ack, sizeof(unsigned char));
    } while(ack != ACK_SERVO);
+}
+
+//Updates the servo positions depending on where the rectangle is in the image
+void updateServoPosition(Rect rect, int width, int height)
+{
+   //Variables storing the top edges of the image 
+   int leftSide  = rect.x;
+   int rightSide = rect.x + rect.width;
+   int topSide   = rect.y;
+   int bottomSide = rect.y + rect.height;
+
+   
+   //Comparisons to determine which way to move the camera
+   //Comparisons for the pan servo
+   if(leftSide < 0 + WIDTH_BOUND)
+   {
+      panServoPos--;
+   }
+   else if(rightSide > width - WIDTH_BOUND)
+   {
+      panServoPos++;
+   }   
+
+   //Comparison for the tilt servo
+   if(topSide < 0 + HEIGHT_BOUND)
+   {
+      tiltServoPos--;
+   }
+   else if(bottomSide > height - HEIGHT_BOUND)
+   {
+      tiltServoPos++;
+   }
+
+   //Check servo bounds and update accordingly
+   if(panServoPos < MIN_SERVO)
+   {
+      panServoPos = MIN_SERVO;
+   }
+   else if(panServoPos > MAX_SERVO)
+   {
+      panServoPos = MAX_SERVO;
+   }
+
+   if(tiltServoPos < MIN_SERVO)
+   {
+      tiltServoPos = MIN_SERVO;
+   }
+   else if(tiltServoPos > MAX_SERVO)
+   {
+      tiltServoPos = MAX_SERVO;
+   }
+
+   //Update the servo positions
+   writeServo(uartFD, TILT_ID, tiltServoPos);
+   writeServo(uartFD, PAN_ID, panServoPos);
+
 }
 
 /**
@@ -286,7 +354,11 @@ static void video_buffer_callback(MMAL_PORT_T *port, MMAL_BUFFER_HEADER_T *buffe
 		
 		face = gray(face_i);  
 
-      
+      //Track the first face that is found
+      if(i == 0)
+      {
+         updateServoPosition(face_i, 320, 240);
+      } 
 
 		// create a rectangle around the face      
 		rectangle(gray, face_i, CV_RGB(255, 255 ,255), 1);
@@ -573,7 +645,7 @@ static void signal_handler(int signal_number)
 //Opens a file descriptor to the hardware UART and initializes it
 int setupUART()
 {
-   int uartFD;
+   int fd;
    struct termios opt;
 
    //Code to turn off the scheduler so this task stays the top priority
@@ -584,27 +656,27 @@ int setupUART()
    mlockall(MCL_CURRENT | MCL_FUTURE);
 
    //Open the uart serial device
-   uartFD = open("/dev/ttyAMA0", O_RDWR | O_NOCTTY); //| O_NDELAY);
+   fd = open("/dev/ttyAMA0", O_RDWR | O_NOCTTY); //| O_NDELAY);
 
    /*Problem opening the uart*/
-   if(uartFD == -1)
+   if(fd == -1)
    {
       perror("Failure opening uart");
       exit(-1);
    }
 
    /*Get the current options of the uart*/
-   tcgetattr(uartFD, &opt);
+   tcgetattr(fd, &opt);
 
    /*Sets the new options of the uart*/
    opt.c_cflag = B19200 | CS8 | CLOCAL | CREAD;
    opt.c_iflag = IGNPAR;
    opt.c_oflag = 0;
    opt.c_lflag = 0;
-   tcflush(uartFD, TCIFLUSH);
-   tcsetattr(uartFD, TCSANOW, &opt);
+   tcflush(fd, TCIFLUSH);
+   tcsetattr(fd, TCSANOW, &opt);
 
-   return uartFD;
+   return fd;
 }
 
 /**
@@ -613,7 +685,6 @@ int setupUART()
 int main(int argc, const char **argv)
 {
    //File descriptor for the uart
-   int uartFD;	
    unsigned char ack;   
 
 /////////////////////////////////
@@ -624,7 +695,6 @@ int main(int argc, const char **argv)
 	// see thinkrpi.wordpress.com, articles on Magic Mirror to understand this command line and parameters
 	//
 	cout<<"start\n";
-	
 
    //Initialize the bcm2835 hardware library
    if(!bcm2835_init())
@@ -647,6 +717,8 @@ int main(int argc, const char **argv)
    //Initialize the servos to their center points
    writeServo(uartFD, TILT_ID, tiltServoPos);
    writeServo(uartFD, PAN_ID, panServoPos);
+
+
 
 	// Note : /!\ change with your opencv path	
 	//fn_haar = "/usr/share/opencv/haarcascades/haarcascade_frontalface_alt.xml";
@@ -749,11 +821,11 @@ int main(int argc, const char **argv)
 			if (mmal_port_send_buffer(camera_video_port, buffer)!= MMAL_SUCCESS)
 		    	vcos_log_error("Unable to send a buffer to encoder output port (%d)", q);
 		}
+	
 		
-		
-		// Now wait until we need to stop
+      // Now wait until we need to stop
 		vcos_sleep(state.timeout);
-  
+ 
 		//mmal_status_to_int(status);
 		// Disable all our ports that are not handled by connections
 		check_disable_port(camera_still_port);

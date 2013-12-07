@@ -1002,4 +1002,5 @@ CMakeFiles/faceDetect.dir/faceDetect.cpp.o: /opt/vc/userland/interface/vmcs_host
 CMakeFiles/faceDetect.dir/faceDetect.cpp.o: /opt/vc/userland/vcinclude/common.h
 CMakeFiles/faceDetect.dir/faceDetect.cpp.o: /usr/include/opencv/cv.h
 CMakeFiles/faceDetect.dir/faceDetect.cpp.o: /usr/include/opencv/highgui.h
+CMakeFiles/faceDetect.dir/faceDetect.cpp.o: /usr/local/include/bcm2835.h
 
