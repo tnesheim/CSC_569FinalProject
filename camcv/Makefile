@@ -99,24 +99,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named camcv
+# Target rules for targets named faceDetect
 
 # Build rule for target.
-camcv: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 camcv
-.PHONY : camcv
+faceDetect: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 faceDetect
+.PHONY : faceDetect
 
 # fast build rule for target.
-camcv/fast:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/build
-.PHONY : camcv/fast
+faceDetect/fast:
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/build
+.PHONY : faceDetect/fast
 
 RaspiCLI.o: RaspiCLI.c.o
 .PHONY : RaspiCLI.o
 
 # target to build an object file
 RaspiCLI.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiCLI.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiCLI.c.o
 .PHONY : RaspiCLI.c.o
 
 RaspiCLI.i: RaspiCLI.c.i
@@ -124,7 +124,7 @@ RaspiCLI.i: RaspiCLI.c.i
 
 # target to preprocess a source file
 RaspiCLI.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiCLI.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiCLI.c.i
 .PHONY : RaspiCLI.c.i
 
 RaspiCLI.s: RaspiCLI.c.s
@@ -132,7 +132,7 @@ RaspiCLI.s: RaspiCLI.c.s
 
 # target to generate assembly for a file
 RaspiCLI.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiCLI.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiCLI.c.s
 .PHONY : RaspiCLI.c.s
 
 RaspiCamControl.o: RaspiCamControl.c.o
@@ -140,7 +140,7 @@ RaspiCamControl.o: RaspiCamControl.c.o
 
 # target to build an object file
 RaspiCamControl.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiCamControl.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiCamControl.c.o
 .PHONY : RaspiCamControl.c.o
 
 RaspiCamControl.i: RaspiCamControl.c.i
@@ -148,7 +148,7 @@ RaspiCamControl.i: RaspiCamControl.c.i
 
 # target to preprocess a source file
 RaspiCamControl.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiCamControl.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiCamControl.c.i
 .PHONY : RaspiCamControl.c.i
 
 RaspiCamControl.s: RaspiCamControl.c.s
@@ -156,7 +156,7 @@ RaspiCamControl.s: RaspiCamControl.c.s
 
 # target to generate assembly for a file
 RaspiCamControl.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiCamControl.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiCamControl.c.s
 .PHONY : RaspiCamControl.c.s
 
 RaspiPreview.o: RaspiPreview.c.o
@@ -164,7 +164,7 @@ RaspiPreview.o: RaspiPreview.c.o
 
 # target to build an object file
 RaspiPreview.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiPreview.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiPreview.c.o
 .PHONY : RaspiPreview.c.o
 
 RaspiPreview.i: RaspiPreview.c.i
@@ -172,7 +172,7 @@ RaspiPreview.i: RaspiPreview.c.i
 
 # target to preprocess a source file
 RaspiPreview.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiPreview.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiPreview.c.i
 .PHONY : RaspiPreview.c.i
 
 RaspiPreview.s: RaspiPreview.c.s
@@ -180,7 +180,7 @@ RaspiPreview.s: RaspiPreview.c.s
 
 # target to generate assembly for a file
 RaspiPreview.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiPreview.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiPreview.c.s
 .PHONY : RaspiPreview.c.s
 
 RaspiTex.o: RaspiTex.c.o
@@ -188,7 +188,7 @@ RaspiTex.o: RaspiTex.c.o
 
 # target to build an object file
 RaspiTex.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiTex.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiTex.c.o
 .PHONY : RaspiTex.c.o
 
 RaspiTex.i: RaspiTex.c.i
@@ -196,7 +196,7 @@ RaspiTex.i: RaspiTex.c.i
 
 # target to preprocess a source file
 RaspiTex.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiTex.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiTex.c.i
 .PHONY : RaspiTex.c.i
 
 RaspiTex.s: RaspiTex.c.s
@@ -204,7 +204,7 @@ RaspiTex.s: RaspiTex.c.s
 
 # target to generate assembly for a file
 RaspiTex.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiTex.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiTex.c.s
 .PHONY : RaspiTex.c.s
 
 RaspiTexUtil.o: RaspiTexUtil.c.o
@@ -212,7 +212,7 @@ RaspiTexUtil.o: RaspiTexUtil.c.o
 
 # target to build an object file
 RaspiTexUtil.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiTexUtil.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiTexUtil.c.o
 .PHONY : RaspiTexUtil.c.o
 
 RaspiTexUtil.i: RaspiTexUtil.c.i
@@ -220,7 +220,7 @@ RaspiTexUtil.i: RaspiTexUtil.c.i
 
 # target to preprocess a source file
 RaspiTexUtil.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiTexUtil.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiTexUtil.c.i
 .PHONY : RaspiTexUtil.c.i
 
 RaspiTexUtil.s: RaspiTexUtil.c.s
@@ -228,39 +228,39 @@ RaspiTexUtil.s: RaspiTexUtil.c.s
 
 # target to generate assembly for a file
 RaspiTexUtil.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/RaspiTexUtil.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiTexUtil.c.s
 .PHONY : RaspiTexUtil.c.s
 
-camcv_vid1.o: camcv_vid1.cpp.o
-.PHONY : camcv_vid1.o
+faceDetect.o: faceDetect.cpp.o
+.PHONY : faceDetect.o
 
 # target to build an object file
-camcv_vid1.cpp.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/camcv_vid1.cpp.o
-.PHONY : camcv_vid1.cpp.o
+faceDetect.cpp.o:
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetect.cpp.o
+.PHONY : faceDetect.cpp.o
 
-camcv_vid1.i: camcv_vid1.cpp.i
-.PHONY : camcv_vid1.i
+faceDetect.i: faceDetect.cpp.i
+.PHONY : faceDetect.i
 
 # target to preprocess a source file
-camcv_vid1.cpp.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/camcv_vid1.cpp.i
-.PHONY : camcv_vid1.cpp.i
+faceDetect.cpp.i:
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetect.cpp.i
+.PHONY : faceDetect.cpp.i
 
-camcv_vid1.s: camcv_vid1.cpp.s
-.PHONY : camcv_vid1.s
+faceDetect.s: faceDetect.cpp.s
+.PHONY : faceDetect.s
 
 # target to generate assembly for a file
-camcv_vid1.cpp.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/camcv_vid1.cpp.s
-.PHONY : camcv_vid1.cpp.s
+faceDetect.cpp.s:
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetect.cpp.s
+.PHONY : faceDetect.cpp.s
 
 mirror.o: mirror.c.o
 .PHONY : mirror.o
 
 # target to build an object file
 mirror.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/mirror.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/mirror.c.o
 .PHONY : mirror.c.o
 
 mirror.i: mirror.c.i
@@ -268,7 +268,7 @@ mirror.i: mirror.c.i
 
 # target to preprocess a source file
 mirror.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/mirror.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/mirror.c.i
 .PHONY : mirror.c.i
 
 mirror.s: mirror.c.s
@@ -276,7 +276,7 @@ mirror.s: mirror.c.s
 
 # target to generate assembly for a file
 mirror.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/mirror.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/mirror.c.s
 .PHONY : mirror.c.s
 
 models.o: models.c.o
@@ -284,7 +284,7 @@ models.o: models.c.o
 
 # target to build an object file
 models.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/models.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/models.c.o
 .PHONY : models.c.o
 
 models.i: models.c.i
@@ -292,7 +292,7 @@ models.i: models.c.i
 
 # target to preprocess a source file
 models.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/models.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/models.c.i
 .PHONY : models.c.i
 
 models.s: models.c.s
@@ -300,7 +300,7 @@ models.s: models.c.s
 
 # target to generate assembly for a file
 models.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/models.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/models.c.s
 .PHONY : models.c.s
 
 sobel.o: sobel.c.o
@@ -308,7 +308,7 @@ sobel.o: sobel.c.o
 
 # target to build an object file
 sobel.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/sobel.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/sobel.c.o
 .PHONY : sobel.c.o
 
 sobel.i: sobel.c.i
@@ -316,7 +316,7 @@ sobel.i: sobel.c.i
 
 # target to preprocess a source file
 sobel.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/sobel.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/sobel.c.i
 .PHONY : sobel.c.i
 
 sobel.s: sobel.c.s
@@ -324,7 +324,7 @@ sobel.s: sobel.c.s
 
 # target to generate assembly for a file
 sobel.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/sobel.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/sobel.c.s
 .PHONY : sobel.c.s
 
 square.o: square.c.o
@@ -332,7 +332,7 @@ square.o: square.c.o
 
 # target to build an object file
 square.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/square.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/square.c.o
 .PHONY : square.c.o
 
 square.i: square.c.i
@@ -340,7 +340,7 @@ square.i: square.c.i
 
 # target to preprocess a source file
 square.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/square.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/square.c.i
 .PHONY : square.c.i
 
 square.s: square.c.s
@@ -348,7 +348,7 @@ square.s: square.c.s
 
 # target to generate assembly for a file
 square.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/square.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/square.c.s
 .PHONY : square.c.s
 
 teapot.o: teapot.c.o
@@ -356,7 +356,7 @@ teapot.o: teapot.c.o
 
 # target to build an object file
 teapot.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/teapot.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/teapot.c.o
 .PHONY : teapot.c.o
 
 teapot.i: teapot.c.i
@@ -364,7 +364,7 @@ teapot.i: teapot.c.i
 
 # target to preprocess a source file
 teapot.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/teapot.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/teapot.c.i
 .PHONY : teapot.c.i
 
 teapot.s: teapot.c.s
@@ -372,7 +372,7 @@ teapot.s: teapot.c.s
 
 # target to generate assembly for a file
 teapot.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/teapot.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/teapot.c.s
 .PHONY : teapot.c.s
 
 tga.o: tga.c.o
@@ -380,7 +380,7 @@ tga.o: tga.c.o
 
 # target to build an object file
 tga.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/tga.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/tga.c.o
 .PHONY : tga.c.o
 
 tga.i: tga.c.i
@@ -388,7 +388,7 @@ tga.i: tga.c.i
 
 # target to preprocess a source file
 tga.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/tga.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/tga.c.i
 .PHONY : tga.c.i
 
 tga.s: tga.c.s
@@ -396,7 +396,7 @@ tga.s: tga.c.s
 
 # target to generate assembly for a file
 tga.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/tga.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/tga.c.s
 .PHONY : tga.c.s
 
 yuv.o: yuv.c.o
@@ -404,7 +404,7 @@ yuv.o: yuv.c.o
 
 # target to build an object file
 yuv.c.o:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/yuv.c.o
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/yuv.c.o
 .PHONY : yuv.c.o
 
 yuv.i: yuv.c.i
@@ -412,7 +412,7 @@ yuv.i: yuv.c.i
 
 # target to preprocess a source file
 yuv.c.i:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/yuv.c.i
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/yuv.c.i
 .PHONY : yuv.c.i
 
 yuv.s: yuv.c.s
@@ -420,7 +420,7 @@ yuv.s: yuv.c.s
 
 # target to generate assembly for a file
 yuv.c.s:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/yuv.c.s
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/yuv.c.s
 .PHONY : yuv.c.s
 
 # Help Target
@@ -429,8 +429,8 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... camcv"
 	@echo "... edit_cache"
+	@echo "... faceDetect"
 	@echo "... rebuild_cache"
 	@echo "... RaspiCLI.o"
 	@echo "... RaspiCLI.i"
@@ -447,9 +447,9 @@ help:
 	@echo "... RaspiTexUtil.o"
 	@echo "... RaspiTexUtil.i"
 	@echo "... RaspiTexUtil.s"
-	@echo "... camcv_vid1.o"
-	@echo "... camcv_vid1.i"
-	@echo "... camcv_vid1.s"
+	@echo "... faceDetect.o"
+	@echo "... faceDetect.i"
+	@echo "... faceDetect.s"
 	@echo "... mirror.o"
 	@echo "... mirror.i"
 	@echo "... mirror.s"

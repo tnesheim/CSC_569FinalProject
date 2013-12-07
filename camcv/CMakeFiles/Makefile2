@@ -53,38 +53,38 @@ CMAKE_SOURCE_DIR = /home/pi/camcv
 CMAKE_BINARY_DIR = /home/pi/camcv
 
 #=============================================================================
-# Target rules for target CMakeFiles/camcv.dir
+# Target rules for target CMakeFiles/faceDetect.dir
 
 # All Build rule for target.
-CMakeFiles/camcv.dir/all:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/depend
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/build
+CMakeFiles/faceDetect.dir/all:
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/depend
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/camcv/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11 12 13
-	@echo "Built target camcv"
-.PHONY : CMakeFiles/camcv.dir/all
+	@echo "Built target faceDetect"
+.PHONY : CMakeFiles/faceDetect.dir/all
 
 # Include target in all.
-all: CMakeFiles/camcv.dir/all
+all: CMakeFiles/faceDetect.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/camcv.dir/rule: cmake_check_build_system
+CMakeFiles/faceDetect.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/camcv/CMakeFiles 13
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/camcv.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/faceDetect.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/camcv/CMakeFiles 0
-.PHONY : CMakeFiles/camcv.dir/rule
+.PHONY : CMakeFiles/faceDetect.dir/rule
 
 # Convenience name for target.
-camcv: CMakeFiles/camcv.dir/rule
-.PHONY : camcv
+faceDetect: CMakeFiles/faceDetect.dir/rule
+.PHONY : faceDetect
 
 # clean rule for target.
-CMakeFiles/camcv.dir/clean:
-	$(MAKE) -f CMakeFiles/camcv.dir/build.make CMakeFiles/camcv.dir/clean
-.PHONY : CMakeFiles/camcv.dir/clean
+CMakeFiles/faceDetect.dir/clean:
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/clean
+.PHONY : CMakeFiles/faceDetect.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/camcv.dir/clean
+clean: CMakeFiles/faceDetect.dir/clean
 .PHONY : clean
 
 #=============================================================================

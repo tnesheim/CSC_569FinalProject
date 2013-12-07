@@ -1,1 +1,1 @@
-/home/pi/camcv/CMakeFiles/camcv.dir
+/home/pi/camcv/CMakeFiles/faceDetect.dir

@@ -1,1 +1,1 @@
-Look at the file: camcv_vid1.cpp
+Look at the file: faceDetect.cpp
