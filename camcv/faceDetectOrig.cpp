@@ -90,11 +90,11 @@ const unsigned char ACK_SERVO = 200;
 
 //Servo max and min values
 const unsigned char MIN_SERVO = 20;
-const unsigned char MAX_SERVO = 130;
+const unsigned char MAX_SERVO = 140;
 
 //Image bounding box values [using 5% currently]
-const int WIDTH_BOUND = 320 * 0.2;
-const int HEIGHT_BOUND = 240 * 0.1;
+const int WIDTH_BOUND = 320 * 0.05;
+const int HEIGHT_BOUND = 240 * 0.05;
 
 //Initialize Servo position to 90 degrees
 unsigned char panServoPos = 90;
@@ -235,16 +235,7 @@ void writeServo(int uartFD, unsigned char servoID, unsigned char val)
    unsigned char txBuf[2];
    unsigned char ack;
 
-   if(servoID == TILT_ID)
-   {
-      printf("Tilt Servo");
-   }
-   else if(servoID == PAN_ID)
-   {
-      printf("Pan Servo");
-   }
-
-   printf(" Cur Val: %d\n", (int) val);
+   printf("Cur Val: %d\n", (int) val);
 
    //Send the servo id and the desired value
    txBuf[0] = servoID;
@@ -259,55 +250,6 @@ void writeServo(int uartFD, unsigned char servoID, unsigned char val)
    {
       read(uartFD, &ack, sizeof(unsigned char));
    } while(ack != ACK_SERVO);
-}
-
-void updateServoPositionOrigin(Rect rect, int width, int height) {
-   int threshold = 10;
-
-   int rectCenterX = rect.x + rect.width/2;
-   int rectCenterY = rect.y + rect.height/2;
-   int screenCenterX = width/2;
-   int screenCenterY = height/2;
-
-   int xOffset = rectCenterX - screenCenterX;
-   int yOffset = rectCenterY - screenCenterY;
-
-   if(xOffset > threshold) {
-      panServoPos++;
-   } else if (xOffset < -1 * threshold) {
-      panServoPos--;
-   }
-
-   if(yOffset > threshold) {
-      cout<<"tilting down\n";
-      tiltServoPos++;
-   } else if (yOffset < -1 * threshold) {
-      cout<<"tilting up\n";
-      tiltServoPos--;
-   }                                        
-
-   //Check servo bounds and update accordingly
-   if(panServoPos < MIN_SERVO)
-   {
-      panServoPos = MIN_SERVO;
-   }
-   else if(panServoPos > MAX_SERVO)
-   {
-      panServoPos = MAX_SERVO;
-   }
-
-   if(tiltServoPos < MIN_SERVO)
-   {
-      tiltServoPos = MIN_SERVO;
-   }
-   else if(tiltServoPos > MAX_SERVO)
-   {
-      tiltServoPos = MAX_SERVO;
-   }
-
-   //Update the servo positions
-   writeServo(uartFD, TILT_ID, tiltServoPos);
-   writeServo(uartFD, PAN_ID, panServoPos);
 }
 
 //Updates the servo positions depending on where the rectangle is in the image
@@ -334,12 +276,10 @@ void updateServoPosition(Rect rect, int width, int height)
    //Comparison for the tilt servo
    if(topSide < 0 + HEIGHT_BOUND)
    {
-      cout<<"tiltingup!\n";
       tiltServoPos--;
    }
    else if(bottomSide > height - HEIGHT_BOUND)
    {
-      cout<<"tiltingdown!\n";
       tiltServoPos++;
    }
 
@@ -379,13 +319,9 @@ static void video_buffer_callback(MMAL_PORT_T *port, MMAL_BUFFER_HEADER_T *buffe
    MMAL_BUFFER_HEADER_T *new_buffer;
    PORT_USERDATA *pData = (PORT_USERDATA *)port->userdata;
 
-   static int cnt = 0;
-
    if (pData)
    {
      
-      cnt++;
-
       if (buffer->length)
       {
 
@@ -419,11 +355,10 @@ static void video_buffer_callback(MMAL_PORT_T *port, MMAL_BUFFER_HEADER_T *buffe
 		face = gray(face_i);  
 
       //Track the first face that is found
-//      if(i == 0 && cnt % 5)
-//      {
-         updateServoPositionOrigin(face_i, 320, 240);
-//         cnt = 0;
-//      } 
+      if(i == 0)
+      {
+         updateServoPosition(face_i, 320, 240);
+      } 
 
 		// create a rectangle around the face      
 		rectangle(gray, face_i, CV_RGB(255, 255 ,255), 1);

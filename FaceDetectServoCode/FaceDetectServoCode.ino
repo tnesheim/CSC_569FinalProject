@@ -16,6 +16,9 @@ const unsigned char TILT_ID = 230;
 const unsigned char PAN_ID  = 220;
 const unsigned char INIT_SERVO = 210;
 const unsigned char ACK_SERVO = 200;
+
+unsigned char tiltPos = 90;
+unsigned char panPos  = 90;
  
 unsigned char data;  
  
@@ -55,22 +58,30 @@ void loop()
      if(data == TILT_ID)
      {
        //Read the data, and write it to the servo
-        data = Serial.read();
-        Serial.write(data);   
-        tiltServo.write(data);
+       data = Serial.read();
+       
+       if(data >= 0 && data <= 180)
+       {
+          tiltPos = data;
+       } 
      }
      else if(data == PAN_ID)
      {
-        //Read the data and write it to the servo
-        data = Serial.read();
-        Serial.write(data);
-        panServo.write(data);
+        //Read the data, and write it to the servo
+       data = Serial.read();
+       
+       if(data >= 0 && data <= 180)
+       {
+          panPos = data;
+       }
      }
 
-     /*Acknowledge the serial communication*/
-     Serial.write(ACK_SERVO); 
-     
-     //Wait for servos to catch up
-     delay(5);
-  }
+     //Acknowledge the serial communication
+     Serial.write(ACK_SERVO);
+  } 
+  
+  tiltServo.write(tiltPos);
+  panServo.write(panPos);
+  //Wait for servos to catch up
+  delay(15);
 } 
