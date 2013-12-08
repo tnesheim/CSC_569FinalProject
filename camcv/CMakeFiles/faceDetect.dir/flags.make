@@ -3,11 +3,11 @@
 
 # compile C with /usr/bin/gcc
 # compile CXX with /usr/bin/c++
-C_FLAGS = -I/usr/include/opencv -I/opt/vc/userland/host_applications/linux/libs/bcm_host/include -I/opt/vc/userland/interface/vcos -I/opt/vc/userland -I/opt/vc/userland/interface/vcos/pthreads -I/opt/vc/userland/interface/vmcs_host/linux -I/opt/vc/userland/interface/khronos/include -I/opt/vc/userland/interface/khronos/common -I/usr/local/include -I/home/pi/camcv/. -I/home/pi/camcv/./gl_scenes   
+C_FLAGS = -I/usr/include/opencv -I/opt/vc/userland/host_applications/linux/libs/bcm_host/include -I/opt/vc/userland/interface/vcos -I/opt/vc/userland -I/opt/vc/userland/interface/vcos/pthreads -I/opt/vc/userland/interface/vmcs_host/linux -I/opt/vc/userland/interface/khronos/include -I/opt/vc/userland/interface/khronos/common -I/usr/local/include -I/home/pi/camcv/. -I/usr/lib/openmpi/include -I/home/pi/camcv/./gl_scenes   
 
 C_DEFINES = 
 
-CXX_FLAGS = -I/usr/include/opencv -I/opt/vc/userland/host_applications/linux/libs/bcm_host/include -I/opt/vc/userland/interface/vcos -I/opt/vc/userland -I/opt/vc/userland/interface/vcos/pthreads -I/opt/vc/userland/interface/vmcs_host/linux -I/opt/vc/userland/interface/khronos/include -I/opt/vc/userland/interface/khronos/common -I/usr/local/include -I/home/pi/camcv/. -I/home/pi/camcv/./gl_scenes   
+CXX_FLAGS = -I/usr/include/opencv -I/opt/vc/userland/host_applications/linux/libs/bcm_host/include -I/opt/vc/userland/interface/vcos -I/opt/vc/userland -I/opt/vc/userland/interface/vcos/pthreads -I/opt/vc/userland/interface/vmcs_host/linux -I/opt/vc/userland/interface/khronos/include -I/opt/vc/userland/interface/khronos/common -I/usr/local/include -I/home/pi/camcv/. -I/usr/lib/openmpi/include -I/home/pi/camcv/./gl_scenes   
 
 CXX_DEFINES = 
 

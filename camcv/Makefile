@@ -231,29 +231,29 @@ RaspiTexUtil.c.s:
 	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/RaspiTexUtil.c.s
 .PHONY : RaspiTexUtil.c.s
 
-faceDetect.o: faceDetect.cpp.o
-.PHONY : faceDetect.o
+faceDetectHaikal.o: faceDetectHaikal.cpp.o
+.PHONY : faceDetectHaikal.o
 
 # target to build an object file
-faceDetect.cpp.o:
-	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetect.cpp.o
-.PHONY : faceDetect.cpp.o
+faceDetectHaikal.cpp.o:
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o
+.PHONY : faceDetectHaikal.cpp.o
 
-faceDetect.i: faceDetect.cpp.i
-.PHONY : faceDetect.i
+faceDetectHaikal.i: faceDetectHaikal.cpp.i
+.PHONY : faceDetectHaikal.i
 
 # target to preprocess a source file
-faceDetect.cpp.i:
-	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetect.cpp.i
-.PHONY : faceDetect.cpp.i
+faceDetectHaikal.cpp.i:
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.i
+.PHONY : faceDetectHaikal.cpp.i
 
-faceDetect.s: faceDetect.cpp.s
-.PHONY : faceDetect.s
+faceDetectHaikal.s: faceDetectHaikal.cpp.s
+.PHONY : faceDetectHaikal.s
 
 # target to generate assembly for a file
-faceDetect.cpp.s:
-	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetect.cpp.s
-.PHONY : faceDetect.cpp.s
+faceDetectHaikal.cpp.s:
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.s
+.PHONY : faceDetectHaikal.cpp.s
 
 mirror.o: mirror.c.o
 .PHONY : mirror.o
@@ -447,9 +447,9 @@ help:
 	@echo "... RaspiTexUtil.o"
 	@echo "... RaspiTexUtil.i"
 	@echo "... RaspiTexUtil.s"
-	@echo "... faceDetect.o"
-	@echo "... faceDetect.i"
-	@echo "... faceDetect.s"
+	@echo "... faceDetectHaikal.o"
+	@echo "... faceDetectHaikal.i"
+	@echo "... faceDetectHaikal.s"
 	@echo "... mirror.o"
 	@echo "... mirror.i"
 	@echo "... mirror.s"

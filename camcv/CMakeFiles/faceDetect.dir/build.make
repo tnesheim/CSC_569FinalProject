@@ -118,28 +118,28 @@ CMakeFiles/faceDetect.dir/RaspiPreview.c.o.provides: CMakeFiles/faceDetect.dir/R
 
 CMakeFiles/faceDetect.dir/RaspiPreview.c.o.provides.build: CMakeFiles/faceDetect.dir/RaspiPreview.c.o
 
-CMakeFiles/faceDetect.dir/faceDetect.cpp.o: CMakeFiles/faceDetect.dir/flags.make
-CMakeFiles/faceDetect.dir/faceDetect.cpp.o: faceDetect.cpp
+CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o: CMakeFiles/faceDetect.dir/flags.make
+CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o: faceDetectHaikal.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/camcv/CMakeFiles $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/faceDetect.dir/faceDetect.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/faceDetect.dir/faceDetect.cpp.o -c /home/pi/camcv/faceDetect.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o -c /home/pi/camcv/faceDetectHaikal.cpp
 
-CMakeFiles/faceDetect.dir/faceDetect.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/faceDetect.dir/faceDetect.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/camcv/faceDetect.cpp > CMakeFiles/faceDetect.dir/faceDetect.cpp.i
+CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/camcv/faceDetectHaikal.cpp > CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.i
 
-CMakeFiles/faceDetect.dir/faceDetect.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/faceDetect.dir/faceDetect.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/camcv/faceDetect.cpp -o CMakeFiles/faceDetect.dir/faceDetect.cpp.s
+CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/camcv/faceDetectHaikal.cpp -o CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.s
 
-CMakeFiles/faceDetect.dir/faceDetect.cpp.o.requires:
-.PHONY : CMakeFiles/faceDetect.dir/faceDetect.cpp.o.requires
+CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o.requires:
+.PHONY : CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o.requires
 
-CMakeFiles/faceDetect.dir/faceDetect.cpp.o.provides: CMakeFiles/faceDetect.dir/faceDetect.cpp.o.requires
-	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetect.cpp.o.provides.build
-.PHONY : CMakeFiles/faceDetect.dir/faceDetect.cpp.o.provides
+CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o.provides: CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o.requires
+	$(MAKE) -f CMakeFiles/faceDetect.dir/build.make CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o.provides.build
+.PHONY : CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o.provides
 
-CMakeFiles/faceDetect.dir/faceDetect.cpp.o.provides.build: CMakeFiles/faceDetect.dir/faceDetect.cpp.o
+CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o.provides.build: CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o
 
 CMakeFiles/faceDetect.dir/RaspiTex.c.o: CMakeFiles/faceDetect.dir/flags.make
 CMakeFiles/faceDetect.dir/RaspiTex.c.o: RaspiTex.c
@@ -353,7 +353,7 @@ faceDetect_OBJECTS = \
 "CMakeFiles/faceDetect.dir/RaspiCamControl.c.o" \
 "CMakeFiles/faceDetect.dir/RaspiCLI.c.o" \
 "CMakeFiles/faceDetect.dir/RaspiPreview.c.o" \
-"CMakeFiles/faceDetect.dir/faceDetect.cpp.o" \
+"CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o" \
 "CMakeFiles/faceDetect.dir/RaspiTex.c.o" \
 "CMakeFiles/faceDetect.dir/RaspiTexUtil.c.o" \
 "CMakeFiles/faceDetect.dir/teapot.c.o" \
@@ -370,7 +370,7 @@ faceDetect_EXTERNAL_OBJECTS =
 faceDetect: CMakeFiles/faceDetect.dir/RaspiCamControl.c.o
 faceDetect: CMakeFiles/faceDetect.dir/RaspiCLI.c.o
 faceDetect: CMakeFiles/faceDetect.dir/RaspiPreview.c.o
-faceDetect: CMakeFiles/faceDetect.dir/faceDetect.cpp.o
+faceDetect: CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o
 faceDetect: CMakeFiles/faceDetect.dir/RaspiTex.c.o
 faceDetect: CMakeFiles/faceDetect.dir/RaspiTexUtil.c.o
 faceDetect: CMakeFiles/faceDetect.dir/teapot.c.o
@@ -401,7 +401,7 @@ CMakeFiles/faceDetect.dir/build: faceDetect
 CMakeFiles/faceDetect.dir/requires: CMakeFiles/faceDetect.dir/RaspiCamControl.c.o.requires
 CMakeFiles/faceDetect.dir/requires: CMakeFiles/faceDetect.dir/RaspiCLI.c.o.requires
 CMakeFiles/faceDetect.dir/requires: CMakeFiles/faceDetect.dir/RaspiPreview.c.o.requires
-CMakeFiles/faceDetect.dir/requires: CMakeFiles/faceDetect.dir/faceDetect.cpp.o.requires
+CMakeFiles/faceDetect.dir/requires: CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o.requires
 CMakeFiles/faceDetect.dir/requires: CMakeFiles/faceDetect.dir/RaspiTex.c.o.requires
 CMakeFiles/faceDetect.dir/requires: CMakeFiles/faceDetect.dir/RaspiTexUtil.c.o.requires
 CMakeFiles/faceDetect.dir/requires: CMakeFiles/faceDetect.dir/teapot.c.o.requires

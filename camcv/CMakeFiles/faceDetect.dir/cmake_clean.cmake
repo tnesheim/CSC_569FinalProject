@@ -2,7 +2,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/faceDetect.dir/RaspiCamControl.c.o"
   "CMakeFiles/faceDetect.dir/RaspiCLI.c.o"
   "CMakeFiles/faceDetect.dir/RaspiPreview.c.o"
-  "CMakeFiles/faceDetect.dir/faceDetect.cpp.o"
+  "CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o"
   "CMakeFiles/faceDetect.dir/RaspiTex.c.o"
   "CMakeFiles/faceDetect.dir/RaspiTexUtil.c.o"
   "CMakeFiles/faceDetect.dir/teapot.c.o"

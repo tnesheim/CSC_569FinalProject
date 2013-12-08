@@ -20,7 +20,7 @@ SET(CMAKE_DEPENDS_CHECK_C
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pi/camcv/faceDetect.cpp" "/home/pi/camcv/CMakeFiles/faceDetect.dir/faceDetect.cpp.o"
+  "/home/pi/camcv/faceDetectHaikal.cpp" "/home/pi/camcv/CMakeFiles/faceDetect.dir/faceDetectHaikal.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -40,6 +40,7 @@ SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/opt/vc/userland/interface/khronos/common"
   "/usr/local/include"
   "."
+  "/usr/lib/openmpi/include"
   "./gl_scenes"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
