@@ -388,7 +388,6 @@ faceDetect: /opt/vc/lib/libvcos.so
 faceDetect: /opt/vc/lib/libbcm_host.so
 faceDetect: /opt/vc/lib/libGLESv2.so
 faceDetect: /opt/vc/lib/libEGL.so
-faceDetect: /home/pi/libfacerec/libopencv_facerec.a
 faceDetect: /usr/local/lib/libbcm2835.a
 faceDetect: CMakeFiles/faceDetect.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable faceDetect"

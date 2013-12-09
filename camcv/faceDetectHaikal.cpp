@@ -63,7 +63,6 @@ extern "C" {
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/objdetect/objdetect.hpp"
-#include "/home/pi/libfacerec/include/facerec.hpp"	//<-- to modify
 
 using namespace cv;
 using namespace std;
@@ -116,7 +115,6 @@ unsigned char tiltServoPos = 90;
 CascadeClassifier face_cascade; 
 CvPoint Myeye_left;
 CvPoint Myeye_right;
-Eigenfaces model;
 string fn_haar;
 string fn_csv;
 int im_width;		// image width
