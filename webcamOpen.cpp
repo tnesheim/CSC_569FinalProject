@@ -1,3 +1,6 @@
+/**
+ * Edited using colorscheme "elflord"
+ */
 #include <cv.h> 
 #include <bcm2835.h>
 #include <termios.h>
@@ -39,6 +42,9 @@ const unsigned char MAX_SERVO = 130;
 const int WIDTH_IMG = 320;
 const int HEIGHT_IMG = 240;
 
+const int MAX_SIZE_TO_DETECT = 60;
+const int MIN_SIZE_TO_DETECT = 20;
+
 //Delta constants
 const unsigned char XDELTA = 1;
 const unsigned char YDELTA = 1;
@@ -51,7 +57,9 @@ int setupUART();
 void updateServoPositionOrigin(Rect rect, int width, int height); 
 void writeServo(int uartFD, unsigned char servoID, unsigned char val);
 /** Function Headers */
-void detectAndDisplay( Mat frame );
+std::vector<Rect> detect( Mat frame_gray, int min, int max);
+void display(Mat frame_gray, Rect * faces, int numFaces);
+
 
 String face_cascade_name = "/usr/share/opencv/lbpcascades/lbpcascade_frontalface.xml";
 CascadeClassifier face_cascade;
@@ -68,79 +76,134 @@ int main(int argc, char** argv )
    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
    printf("size: %d, rank: %d\n", size, rank);
 
-   unsigned char ack;   
 
-   cout<<"start\n";
+   int range = MAX_SIZE_TO_DETECT - MIN_SIZE_TO_DETECT;
+   int rangePerNode = size / range;
+   int minRange = MIN_SIZE_TO_DETECT + rangePerNode * rank; 
+   int maxRange = rank != size - 1 ? MIN_SIZE_TO_DETECT + (rangePerNode * rank) : MAX_SIZE_TO_DETECT;
 
-   //Initialize the bcm2835 hardware library
-   if(!bcm2835_init())
-   {
-      fprintf(stderr, "Unable to initialize bcm2835 library.\n");
-      exit(-2);
-   }
 
-   //Open and initialize the hardware uart
-   uartFD = setupUART();
-   cout<<"started servos\n";
-   //Send a short initialization delay to ensure proper starting
-   bcm2835_delay(3000);
 
-   //Send the init to the servos
-   ack = INIT_SERVO;
-   write(uartFD, &ack, sizeof(unsigned char));
-   bcm2835_delay(1);
+   char arr[76800];
 
-   //Initialize the servos to their center points
-   writeServo(uartFD, TILT_ID, tiltServoPos);
-   writeServo(uartFD, PAN_ID, panServoPos);
-   cout<<"initialized servos\n";
-
-   CvCapture* capture;
 
    Mat frame;
+   CvCapture* capture;
+   unsigned char ack;   
+   Rect * all_faces;
 
-   //-- 1. Load the cascades
-   if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading\n"); return -1; };
+   int * sizesToSend;
+   int * displs;
+   if(rank==0) {
+      all_faces = (Rect *) calloc(size, sizeof(Rect));
+      sizesToSend = (int *) calloc(size , sizeof(int)); 
+      displs = (int *) calloc(size , sizeof(int));
+      cout<<"start\n";
 
-   //-- 2. Read the video stream
-   capture = cvCaptureFromCAM( -1 );
-   cout<<"starting caputre loop\n";
+      //Initialize the bcm2835 hardware library
+      if(!bcm2835_init())
+      {
+         fprintf(stderr, "Unable to initialize bcm2835 library.\n");
+         exit(-2);
+      }
+
+      //Open and initialize the hardware uart
+      uartFD = setupUART();
+      cout<<"started servos\n";
+      //Send a short initialization delay to ensure proper starting
+      bcm2835_delay(3000);
+
+      //Send the init to the servos
+      ack = INIT_SERVO;
+      write(uartFD, &ack, sizeof(unsigned char));
+      bcm2835_delay(1);
+
+      //Initialize the servos to their center points
+      writeServo(uartFD, TILT_ID, tiltServoPos);
+      writeServo(uartFD, PAN_ID, panServoPos);
+      cout<<"initialized servos\n";
+
+
+
+      //-- 1. Load the cascades
+      if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading\n"); return -1; };
+
+      //-- 2. Read the video stream
+      capture = cvCaptureFromCAM( -1 );
+      cout<<"starting caputre loop\n";
+
+   }
    if( capture )
    {
-      cvSetCaptureProperty(capture,CV_CAP_PROP_FRAME_WIDTH, WIDTH_IMG);
-
-      cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_HEIGHT, HEIGHT_IMG);
+      if(rank==0) {
+         cvSetCaptureProperty(capture,CV_CAP_PROP_FRAME_WIDTH, WIDTH_IMG);
+         cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_HEIGHT, HEIGHT_IMG);
+      }
 
       while( true )
       {
-         frame = cvQueryFrame( capture );
+         try {
+            if(rank==0) {
+               frame = cvQueryFrame( capture );
+            }
+            //-- 3. Apply the classifier to the frame
+            if( rank !=0 || !frame.empty() )
+            {
+               Mat frame_gray;
+               int bytesToRecieve;
+               std::vector<Rect> faces;
 
-         //-- 3. Apply the classifier to the frame
-         if( !frame.empty() )
-         { 
-            Mat frame_gray;
-            std::vector<Rect> faces; 
-            cvtColor( frame, frame_gray, CV_BGR2GRAY );
-            equalizeHist( frame_gray, frame_gray );
+               if(rank==0 && frame.rows == HEIGHT_IMG && frame.cols == WIDTH_IMG) { 
+                  cvtColor( frame, frame_gray, CV_BGR2GRAY );
+                  equalizeHist( frame_gray, frame_gray );
+                  memcpy(arr, frame_gray.data, 76800); 
+               } else if(rank == 0) {
+                  cerr << "incorrect frame sizes. " << frame.rows << " : "<< frame.cols <<" \n";
+               }
 
-            // TODO: not 20,60 
-            faces = detect( frame_gray, 20, 60);
-            display(faces);
-         }
-         else
-         { 
-            cerr<<" --(!) No captured frame -- Break!\n";
-            break;
-         }
+               MPI_Bcast(arr, 76800, MPI_CHAR, 0, MPI_COMM_WORLD);
+               Mat mat = Mat(HEIGHT_IMG, WIDTH_IMG, CV_8UC1, arr);
+               faces = detect( mat, minRange, maxRange);
+               int numFaces = faces.size();
+               int bytesToSend = (numFaces==0) ? 0 : sizeof(Rect);
+               MPI_Gather(&bytesToSend, 1, MPI_INT, sizesToSend, size, MPI_INT, 0, MPI_COMM_WORLD); 
+               int bytestoRecieve = 0;
+               for(int i =0; i < size; i++) {
+                  bytesToRecieve +=sizesToSend[i];
+                  if(i+1 < size) {
+                     displs[i+1] = displs[i] + sizesToSend[i];
+                  }
+               }
+               MPI_Barrier(MPI_COMM_WORLD);
+               MPI_CHECK(MPI_Gatherv(&(faces[0]), bytesToSend, MPI_CHAR, all_faces, sizesToSend, displs, MPI_CHAR, 0, MPI_COMM_WORLD));
+               if(rank==0) {
+                  try {
+                     display(mat, all_faces, bytesToRecieve / sizeof(Rect));
+                  } catch(int e) {
+                     cerr<<"caught an err: " << e << "\n";
+                  }
+               }
+            }
+            else
+            { 
+               cerr<<" --(!) No captured frame -- Break!\n";
+               break;
+            }
 
-         int c = waitKey(100);
-         if( (char)c == 'c' ) { 
-            cerr<<"Detected 'c', Exiting!\n";
-            break;
+            if(rank==0) {
+               int c = waitKey(100);
+               if( (char)c == 'c' ) { 
+                  cerr<<"Detected 'c', Exiting!\n";
+                  break;
+               }
+            }
+         }catch (int e) {
+            cerr << "caught an err: " << e << "\n";
          }
       }
    } else {
       cerr<<"Webcam not initialized!\n";
+      exit(1);
    }
    MPI_Finalize();
    return 0;
@@ -151,28 +214,18 @@ std::vector<Rect> detect( Mat frame_gray, int min, int max )
 {
    std::vector<Rect> faces;
    //-- Detect faces
-   face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(min, max) );
+   face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, CV_HAAR_SCALE_IMAGE, Size(min, max));
    return faces;
 }
 
-void display(Mat frame_gray, std::vector<Rect> faces) {
+void display(Mat frame_gray, Rect * faces, int numFaces) {
+   if(numFaces > 0){
+      updateServoPositionOrigin(faces[0], WIDTH_IMG, HEIGHT_IMG);
 
-   for( size_t i = 0; i < faces.size(); i++ )
-   {
-      if(i == 0)
-      {
-         updateServoPositionOrigin(faces[i], WIDTH_IMG, HEIGHT_IMG);
-      }
-
-      Point center( faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5 );
-      ellipse( frame_gray, center, Size( faces[i].width*0.5, faces[i].height*0.5), 0, 0, 360, Scalar( 255, 0, 255 ), 4, 8, 0 );
-
-      Mat faceROI = frame_gray( faces[i] );
-
+      rectangle(frame_gray, faces[0], CV_RGB(255,255,255),1);
+      imshow( window_name, frame_gray );                                                                                          
    }
-   //-- Show what you got
-   imshow( window_name, frame_gray );                                                                                          }
-   }
+}
 void updateServoPositionOrigin(Rect rect, int width, int height) {
    int threshold = 20;
 
